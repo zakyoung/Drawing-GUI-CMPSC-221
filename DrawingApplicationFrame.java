@@ -38,15 +38,19 @@ public class DrawingApplicationFrame extends JFrame
   private JPanel outerHeaderPanel;
   private JPanel upperInnerPanel;
   private JPanel lowerInnerPanel;
+  private JLabel shape;
   private JComboBox<String> shapePickingBox;
   private JButton colorPicker1;
   private JButton colorPicker2;
   private JButton undo;
   private JButton clear;
+  private JLabel optionsLabel;
   private JCheckBox filled;
   private JCheckBox useGradient;
   private JCheckBox dashed;
+  private JLabel lineWidth;
   private JSpinner strokeWidth;
+  private JLabel dashLength;
   private JSpinner strokeDashLength;
   private JLabel status;
   private static final String[] shapes = {"Rectangle","Line","Oval"};
@@ -67,23 +71,26 @@ public class DrawingApplicationFrame extends JFrame
     {
         super("Java 2D Drawings");
         outerHeaderPanel = new JPanel();
-        outerHeaderPanel.setBackground(Color.blue);
+        outerHeaderPanel.setBackground(Color.decode("#00FFFF"));
         upperInnerPanel = new JPanel();
         upperInnerPanel.setLayout(new FlowLayout());
         
     
         lowerInnerPanel = new JPanel();
-        lowerInnerPanel.setLayout(new FlowLayout());
+        lowerInnerPanel.setLayout(new FlowLayout(FlowLayout.CENTER,5,0));
+        lowerInnerPanel.setBackground(Color.decode("#00FFFF"));
 
         // add widgets to panels
         
         // firstLine widgets
+        shape = new JLabel("Shape:");
         shapePickingBox = new JComboBox<String>(shapes);
         shapePickingBox.setMaximumRowCount(3);
         colorPicker1 = new JButton("1st Color");
         colorPicker2 = new JButton("2nd Color");
         undo = new JButton("Undo");
         clear = new JButton("Clear");
+        upperInnerPanel.add(shape);
         upperInnerPanel.add(shapePickingBox);
         upperInnerPanel.add(colorPicker1);
         upperInnerPanel.add(colorPicker2);
@@ -91,15 +98,21 @@ public class DrawingApplicationFrame extends JFrame
         upperInnerPanel.add(clear);
         
         // secondLine widgets
+        optionsLabel = new JLabel("Options:");
         filled = new JCheckBox("Filled");
         useGradient = new JCheckBox("Use Gradient");
         dashed = new JCheckBox("Dashed");
+        lineWidth = new JLabel("Line Width");
         strokeWidth = new JSpinner();
+        dashLength = new JLabel("Dash Length");
         strokeDashLength = new JSpinner();
+        lowerInnerPanel.add(optionsLabel);
         lowerInnerPanel.add(filled);
         lowerInnerPanel.add(useGradient);
         lowerInnerPanel.add(dashed);
+        lowerInnerPanel.add(lineWidth);
         lowerInnerPanel.add(strokeWidth);
+        lowerInnerPanel.add(dashLength);
         lowerInnerPanel.add(strokeDashLength);
 
         // add top panel of two panels  
@@ -158,7 +171,7 @@ public class DrawingApplicationFrame extends JFrame
   public static void main(String[] args){
     DrawingApplicationFrame mygui = new DrawingApplicationFrame();
     mygui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    mygui.setSize(500,300);    
+    mygui.setSize(700,500);    
     mygui.setVisible(true);  
   }
 }
