@@ -74,7 +74,7 @@ public class DrawingApplicationFrame extends JFrame
         outerHeaderPanel.setBackground(Color.decode("#00FFFF"));
         upperInnerPanel = new JPanel();
         upperInnerPanel.setLayout(new FlowLayout());
-        
+        upperInnerPanel.setBackground(Color.decode("#00FFFF"));
     
         lowerInnerPanel = new JPanel();
         lowerInnerPanel.setLayout(new FlowLayout(FlowLayout.CENTER,5,0));
