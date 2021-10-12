@@ -67,14 +67,13 @@ public class DrawingApplicationFrame extends JFrame
     {
         super("Java 2D Drawings");
         outerHeaderPanel = new JPanel();
-        outerHeaderPanel.setLayout(new GridLayout(2,1));
-
+        outerHeaderPanel.setBackground(Color.blue);
         upperInnerPanel = new JPanel();
-        upperInnerPanel.setLayout(new GridLayout(1,5));
+        upperInnerPanel.setLayout(new FlowLayout());
         
     
         lowerInnerPanel = new JPanel();
-        lowerInnerPanel.setLayout(new GridLayout(1,5));
+        lowerInnerPanel.setLayout(new FlowLayout());
 
         // add widgets to panels
         
