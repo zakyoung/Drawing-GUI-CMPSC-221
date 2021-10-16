@@ -41,7 +41,9 @@ public class DrawingApplicationFrame extends JFrame
   private JLabel shape;
   private JComboBox<String> shapePickingBox;
   private JButton colorPicker1;
+  private Color color1;
   private JButton colorPicker2;
+  private Color color2;
   private JButton undo;
   private JButton clear;
   private JLabel optionsLabel;
@@ -53,6 +55,7 @@ public class DrawingApplicationFrame extends JFrame
   private JLabel dashLength;
   private JSpinner strokeDashLength;
   private JLabel status;
+  private final BorderLayout layout;
   private static final String[] shapes = {"Rectangle","Line","Oval"};
 
     // Create the panels for the top of the application. One panel for each
@@ -70,7 +73,10 @@ public class DrawingApplicationFrame extends JFrame
     public DrawingApplicationFrame()
     {
         super("Java 2D Drawings");
+        layout = new BorderLayout(5,5);
+        setLayout(layout);
         outerHeaderPanel = new JPanel();
+        outerHeaderPanel.setLayout(new GridLayout(2,1));
         outerHeaderPanel.setBackground(Color.decode("#00FFFF"));
         upperInnerPanel = new JPanel();
         upperInnerPanel.setLayout(new FlowLayout());
@@ -118,7 +124,7 @@ public class DrawingApplicationFrame extends JFrame
         // add top panel of two panels  
         outerHeaderPanel.add(upperInnerPanel);
         outerHeaderPanel.add(lowerInnerPanel);
-        super.add(outerHeaderPanel);
+        super.add(outerHeaderPanel, BorderLayout.NORTH);
 
         // add topPanel to North, drawPanel to Center, and statusLabel to South
         
@@ -171,7 +177,7 @@ public class DrawingApplicationFrame extends JFrame
   public static void main(String[] args){
     DrawingApplicationFrame mygui = new DrawingApplicationFrame();
     mygui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    mygui.setSize(700,500);    
+    mygui.setSize(650,500);    
     mygui.setVisible(true);  
   }
 }
