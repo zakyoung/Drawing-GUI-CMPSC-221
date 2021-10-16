@@ -125,10 +125,18 @@ public class DrawingApplicationFrame extends JFrame
         // add top panel of two panels  
         outerHeaderPanel.add(upperInnerPanel);
         outerHeaderPanel.add(lowerInnerPanel);
-        super.add(outerHeaderPanel, BorderLayout.NORTH);
+        DrawPanel drawPanel = new DrawPanel();
+        JLabel mouseLocation = new JLabel("Placeholder");
+        JPanel bottomHolder = new JPanel();
+        bottomHolder.setLayout(new FlowLayout(FlowLayout.LEFT));
+        bottomHolder.setBackground(Color.decode("#F0EFE9"));
+        bottomHolder.add(mouseLocation);
 
         // add topPanel to North, drawPanel to Center, and statusLabel to South
-        
+        super.add(outerHeaderPanel, BorderLayout.NORTH);
+        super.add(drawPanel,BorderLayout.CENTER);
+        super.add(bottomHolder,BorderLayout.SOUTH);
+
         //add listeners and event handlers
         ButtonHandlerColorOne colorOneHandler = new ButtonHandlerColorOne();
         ButtonHandlerColorTwo colorTwoHandler = new ButtonHandlerColorTwo();
@@ -155,13 +163,13 @@ public class DrawingApplicationFrame extends JFrame
     private class ButtonHandlerUndo implements ActionListener{
       @Override
       public void actionPerformed(ActionEvent event){
-        color1 = Color.RED;
+        ;
       }
       }
     private class ButtonHandlerClear implements ActionListener{
       @Override
       public void actionPerformed(ActionEvent event){
-        color1 = Color.RED;
+        ;
       }
       }
 
