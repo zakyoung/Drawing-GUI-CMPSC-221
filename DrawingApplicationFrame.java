@@ -56,8 +56,12 @@ public class DrawingApplicationFrame extends JFrame
   private JLabel dashLength;
   private JSpinner strokeDashLength;
   private JLabel status;
+  private Stroke stroke;
+  private Paint paint;
   private final BorderLayout layout;
-  private static final String[] shapes = {"Rectangle","Line","Oval"};
+  ArrayList<MyShapes> shapes = new ArrayList<MyShapes>();
+  
+  private static final String[] shapesText = {"Rectangle","Line","Oval"};
 
     // Create the panels for the top of the application. One panel for each
     // line and one to contain both of those panels.
@@ -91,7 +95,7 @@ public class DrawingApplicationFrame extends JFrame
         
         // firstLine widgets
         shape = new JLabel("Shape:");
-        shapePickingBox = new JComboBox<String>(shapes);
+        shapePickingBox = new JComboBox<String>(shapesText);
         shapePickingBox.setMaximumRowCount(3);
         colorPicker1 = new JButton("1st Color");
         colorPicker2 = new JButton("2nd Color");
@@ -126,11 +130,11 @@ public class DrawingApplicationFrame extends JFrame
         outerHeaderPanel.add(upperInnerPanel);
         outerHeaderPanel.add(lowerInnerPanel);
         DrawPanel drawPanel = new DrawPanel();
-        JLabel mouseLocation = new JLabel("Placeholder");
+        status = new JLabel("Placeholder");
         JPanel bottomHolder = new JPanel();
         bottomHolder.setLayout(new FlowLayout(FlowLayout.LEFT));
-        bottomHolder.setBackground(Color.decode("#F0EFE9"));
-        bottomHolder.add(mouseLocation);
+        bottomHolder.setBackground(Color.decode("#D9D9D4"));
+        bottomHolder.add(status);
 
         // add topPanel to North, drawPanel to Center, and statusLabel to South
         super.add(outerHeaderPanel, BorderLayout.NORTH);
@@ -163,13 +167,15 @@ public class DrawingApplicationFrame extends JFrame
     private class ButtonHandlerUndo implements ActionListener{
       @Override
       public void actionPerformed(ActionEvent event){
-        ;
+        if (shapes.size() != 0){
+          shapes.remove(shapes.size() - 1);
+        }
       }
       }
     private class ButtonHandlerClear implements ActionListener{
       @Override
       public void actionPerformed(ActionEvent event){
-        ;
+        shapes.clear();
       }
       }
 
@@ -188,8 +194,9 @@ public class DrawingApplicationFrame extends JFrame
         {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
-
-            //loop through and draw each shape in the shapes arraylist
+            for (MyShapes shp: shapes){
+              shp.draw(g2d);
+            }
 
         }
 
@@ -199,8 +206,39 @@ public class DrawingApplicationFrame extends JFrame
 
             public void mousePressed(MouseEvent event)
             {
+              // We need paint variable and set values based on top two lines
+              String selectedShape = shapePickingBox.getSelectedItem().toString();
+              boolean filledVal = filled.isSelected();
+              Point pointA = new Point(event.getX(),event.getY());
+              if (useGradient.isSelected()){
+                paint = new GradientPaint(0, 0, color1, 50, 50, color2, true);
+              }
+              else{
+                paint = color1;
+              }
+
+              if (dashed.isSelected())
+              {
+                float[] strokeWidthVal = {(float) strokeWidth.getValue()};
+                stroke = new BasicStroke((float) strokeDashLength.getValue(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 10, strokeWidthVal, 0);
+            } 
+              else{
+                stroke = new BasicStroke((float) strokeDashLength.getValue(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
             }
 
+            if (selectedShape.equals("Rectangle")){
+              MyRectangle newShape = new MyRectangle(pointA, pointA, paint, stroke, filledVal);
+              shapes.add(newShape);
+            }
+            else if (selectedShape.equals("Line")){
+              MyLine newShape = new MyLine(pointA, pointA, paint, stroke);
+              shapes.add(newShape);
+            }
+            else{
+              MyOval newShape = new MyOval(pointA, pointA, paint, stroke, filledVal);
+              shapes.add(newShape);
+            }
+            }
             public void mouseReleased(MouseEvent event)
             {
             }
