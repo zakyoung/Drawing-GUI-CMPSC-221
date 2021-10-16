@@ -29,6 +29,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
+import javax.swing.JColorChooser;
 /**
  *
  * @author acv
@@ -129,7 +130,41 @@ public class DrawingApplicationFrame extends JFrame
         // add topPanel to North, drawPanel to Center, and statusLabel to South
         
         //add listeners and event handlers
+        ButtonHandlerColorOne colorOneHandler = new ButtonHandlerColorOne();
+        ButtonHandlerColorTwo colorTwoHandler = new ButtonHandlerColorTwo();
+        ButtonHandlerUndo undoHandler = new ButtonHandlerUndo();
+        ButtonHandlerClear clearHandler = new ButtonHandlerClear();
+        colorPicker1.addActionListener(colorOneHandler);
+        colorPicker2.addActionListener(colorTwoHandler);
+        undo.addActionListener(undoHandler);
+        clear.addActionListener(clearHandler);
     }
+    private class ButtonHandlerColorOne implements ActionListener{
+      @Override
+      public void actionPerformed(ActionEvent event){
+        color1 = JColorChooser.showDialog
+        (DrawingApplicationFrame.this,"Choose a color",Color.BLACK);
+      }
+      }
+    private class ButtonHandlerColorTwo implements ActionListener{
+      @Override
+      public void actionPerformed(ActionEvent event){
+        color2 = JColorChooser.showDialog(DrawingApplicationFrame.this,"Choose a color",Color.BLACK);
+      }
+      }
+    private class ButtonHandlerUndo implements ActionListener{
+      @Override
+      public void actionPerformed(ActionEvent event){
+        color1 = Color.RED;
+      }
+      }
+    private class ButtonHandlerClear implements ActionListener{
+      @Override
+      public void actionPerformed(ActionEvent event){
+        color1 = Color.RED;
+      }
+      }
+
 
     // Create event handlers, if needed
 
