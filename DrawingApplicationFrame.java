@@ -171,6 +171,7 @@ public class DrawingApplicationFrame extends JFrame
       public void actionPerformed(ActionEvent event){
         if (shapes.size() != 0){
           shapes.remove(shapes.size() - 1);
+          repaint();
         }
       }
       }
@@ -178,6 +179,7 @@ public class DrawingApplicationFrame extends JFrame
       @Override
       public void actionPerformed(ActionEvent event){
         shapes.clear();
+        repaint();
       }
       }
 
