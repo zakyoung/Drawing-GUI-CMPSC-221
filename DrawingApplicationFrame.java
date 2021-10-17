@@ -60,7 +60,7 @@ public class DrawingApplicationFrame extends JFrame
   private Paint paint;
   private final BorderLayout layout;
   ArrayList<MyShapes> shapes = new ArrayList<MyShapes>();
-  
+  private MyShapes currentShape;
   private static final String[] shapesText = {"Rectangle","Line","Oval"};
 
     // Create the panels for the top of the application. One panel for each
@@ -130,7 +130,7 @@ public class DrawingApplicationFrame extends JFrame
         outerHeaderPanel.add(upperInnerPanel);
         outerHeaderPanel.add(lowerInnerPanel);
         DrawPanel drawPanel = new DrawPanel();
-        status = new JLabel("Placeholder");
+        status = new JLabel("(0,0)");
         JPanel bottomHolder = new JPanel();
         bottomHolder.setLayout(new FlowLayout(FlowLayout.LEFT));
         bottomHolder.setBackground(Color.decode("#D9D9D4"));
@@ -188,6 +188,10 @@ public class DrawingApplicationFrame extends JFrame
 
         public DrawPanel()
         {
+          super.setBackground(Color.WHITE);
+          MouseHandler handler = new MouseHandler();
+          super.addMouseListener(handler);
+          super.addMouseMotionListener(handler);
         }
 
         public void paintComponent(Graphics g)
@@ -216,27 +220,25 @@ public class DrawingApplicationFrame extends JFrame
               else{
                 paint = color1;
               }
-
               if (dashed.isSelected())
               {
-                float[] strokeWidthVal = {(float) strokeWidth.getValue()};
-                stroke = new BasicStroke((float) strokeDashLength.getValue(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 10, strokeWidthVal, 0);
+                float[] strokeWidthVal = {(float) (Integer) strokeWidth.getValue()};
+                stroke = new BasicStroke((float) (Integer) strokeDashLength.getValue(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 10, strokeWidthVal, 0);
             } 
               else{
-                stroke = new BasicStroke((float) strokeDashLength.getValue(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+                stroke = new BasicStroke((float) (Integer) strokeDashLength.getValue(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
             }
-
             if (selectedShape.equals("Rectangle")){
-              MyRectangle newShape = new MyRectangle(pointA, pointA, paint, stroke, filledVal);
-              shapes.add(newShape);
+              currentShape = new MyRectangle(pointA, pointA, paint, stroke, filledVal);
+              shapes.add(currentShape);
             }
             else if (selectedShape.equals("Line")){
-              MyLine newShape = new MyLine(pointA, pointA, paint, stroke);
-              shapes.add(newShape);
+              currentShape = new MyLine(pointA, pointA, paint, stroke);
+              shapes.add(currentShape);
             }
             else{
-              MyOval newShape = new MyOval(pointA, pointA, paint, stroke, filledVal);
-              shapes.add(newShape);
+              currentShape = new MyOval(pointA, pointA, paint, stroke, filledVal);
+              shapes.add(currentShape);
             }
             }
             public void mouseReleased(MouseEvent event)
@@ -246,11 +248,16 @@ public class DrawingApplicationFrame extends JFrame
             @Override
             public void mouseDragged(MouseEvent event)
             {
+              Point currentPoint = new Point(event.getX(),event.getY());
+              currentShape.setEndPoint(currentPoint);
+              repaint();
+              
             }
 
             @Override
             public void mouseMoved(MouseEvent event)
             {
+              status.setText(String.format("(%d,%d)",event.getX(),event.getY()));
             }
         }
 
