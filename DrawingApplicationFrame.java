@@ -131,15 +131,11 @@ public class DrawingApplicationFrame extends JFrame
         outerHeaderPanel.add(lowerInnerPanel);
         DrawPanel drawPanel = new DrawPanel();
         status = new JLabel("(0,0)");
-        JPanel bottomHolder = new JPanel();
-        bottomHolder.setLayout(new FlowLayout(FlowLayout.LEFT));
-        bottomHolder.setBackground(Color.decode("#D9D9D4"));
-        bottomHolder.add(status);
-
+        
         // add topPanel to North, drawPanel to Center, and statusLabel to South
         super.add(outerHeaderPanel, BorderLayout.NORTH);
         super.add(drawPanel,BorderLayout.CENTER);
-        super.add(bottomHolder,BorderLayout.SOUTH);
+        super.add(status,BorderLayout.SOUTH);
 
         //add listeners and event handlers
         ButtonHandlerColorOne colorOneHandler = new ButtonHandlerColorOne();
@@ -224,7 +220,7 @@ public class DrawingApplicationFrame extends JFrame
               else{
                 paint = color1;
               }
-              if (dashed.isSelected())
+              if (dashed.isSelected() && ((float) (Integer) strokeDashLength.getValue() != 0) )
               {
                 float[] strokeWidthVal = {(float) (Integer) strokeDashLength.getValue()};
                 stroke = new BasicStroke((float) (Integer) strokeWidth.getValue(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 10, strokeWidthVal, 0);
