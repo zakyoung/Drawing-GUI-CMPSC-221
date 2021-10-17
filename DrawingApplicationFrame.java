@@ -146,6 +146,8 @@ public class DrawingApplicationFrame extends JFrame
         ButtonHandlerColorTwo colorTwoHandler = new ButtonHandlerColorTwo();
         ButtonHandlerUndo undoHandler = new ButtonHandlerUndo();
         ButtonHandlerClear clearHandler = new ButtonHandlerClear();
+        color1 = Color.BLACK;
+        color2 = Color.RED;
         colorPicker1.addActionListener(colorOneHandler);
         colorPicker2.addActionListener(colorTwoHandler);
         undo.addActionListener(undoHandler);
@@ -222,11 +224,11 @@ public class DrawingApplicationFrame extends JFrame
               }
               if (dashed.isSelected())
               {
-                float[] strokeWidthVal = {(float) (Integer) strokeWidth.getValue()};
-                stroke = new BasicStroke((float) (Integer) strokeDashLength.getValue(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 10, strokeWidthVal, 0);
+                float[] strokeWidthVal = {(float) (Integer) strokeDashLength.getValue()};
+                stroke = new BasicStroke((float) (Integer) strokeWidth.getValue(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 10, strokeWidthVal, 0);
             } 
               else{
-                stroke = new BasicStroke((float) (Integer) strokeDashLength.getValue(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+                stroke = new BasicStroke((float) (Integer) strokeWidth.getValue(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
             }
             if (selectedShape.equals("Rectangle")){
               currentShape = new MyRectangle(pointA, pointA, paint, stroke, filledVal);
