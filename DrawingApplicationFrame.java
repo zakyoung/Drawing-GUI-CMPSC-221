@@ -266,10 +266,4 @@ public class DrawingApplicationFrame extends JFrame
         }
 
     }
-  public static void main(String[] args){
-    DrawingApplicationFrame mygui = new DrawingApplicationFrame();
-    mygui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    mygui.setSize(650,500);    
-    mygui.setVisible(true);  
-  }
 }
