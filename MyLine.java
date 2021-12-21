@@ -26,5 +26,5 @@ public class MyLine extends MyShapes{
         g2d.setStroke(getStroke());
         g2d.draw(new Line2D.Double((int)(getStartPoint().getX()), (int)(getStartPoint().getY()), (int)(getEndPoint().getX()), (int)(getEndPoint().getY())));
     }
-    
+     
 }
