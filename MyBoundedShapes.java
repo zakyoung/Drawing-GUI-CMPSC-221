@@ -54,5 +54,5 @@ public abstract class MyBoundedShapes extends MyShapes{
         return Math.abs((int)getStartPoint().getY() - (int)getEndPoint().getY());
     }
     
-    
+     
 }
