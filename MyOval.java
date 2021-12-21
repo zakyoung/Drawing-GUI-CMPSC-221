@@ -33,7 +33,7 @@ public class MyOval extends MyBoundedShapes{
         {
             g2d.draw(new Ellipse2D.Double(getTopLeftX(), getTopLeftY(), getWidth(), getHeight()));
         }
-        
+         
     }
     
 }
