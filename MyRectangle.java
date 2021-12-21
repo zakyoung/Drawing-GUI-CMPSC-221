@@ -29,7 +29,7 @@ public class MyRectangle extends MyBoundedShapes{
         {
             g2d.fill(new Rectangle2D.Double(getTopLeftX(), getTopLeftY(), getWidth(), getHeight()));
         }
-        else
+        else 
         {
             g2d.draw(new Rectangle2D.Double(getTopLeftX(), getTopLeftY(), getWidth(), getHeight()));
         }
