@@ -25,5 +25,5 @@ public class Java2dDrawingApplication
         frame.setSize(650,500);
         frame.setVisible(true);
     }
-    
+     
 }
