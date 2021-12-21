@@ -92,5 +92,5 @@ public abstract class MyShapes {
     public void setStroke(Stroke stroke) {
         this.stroke = stroke;
     }
-    
+     
 }
